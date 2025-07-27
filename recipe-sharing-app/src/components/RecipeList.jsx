@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
+import FavoriteButton from './FavoriteButton';
 
 const RecipeList = () => {
   const recipes = useRecipeStore(state => state.recipes);
@@ -53,7 +54,10 @@ const RecipeList = () => {
               className="recipe-card-link"
             >
               <div className="recipe-card">
-                <h3>{recipe.title}</h3>
+                <div className="recipe-card-header">
+                  <h3>{recipe.title}</h3>
+                  <FavoriteButton recipeId={recipe.id} size="small" />
+                </div>
                 <p>{recipe.description}</p>
                 <div className="recipe-card-footer">
                   <span className="click-hint">Click to view details</span>

@@ -7,6 +7,8 @@ A modern React application for sharing and discovering recipes, built with Zusta
 - **Add Recipes**: Simple form to add new recipes with title and description
 - **View Recipes**: Display all added recipes in a clean, card-based layout
 - **Search & Filter**: Advanced search functionality to find recipes by title or description
+- **Favorites System**: Mark recipes as favorites and manage your personal collection
+- **Personalized Recommendations**: Get recipe suggestions based on your favorites
 - **Recipe Details**: Click on any recipe to view its detailed information
 - **Edit Recipes**: Modify existing recipes with an inline edit form
 - **Delete Recipes**: Remove recipes with confirmation dialog
@@ -32,6 +34,9 @@ recipe-sharing-app/
 │   │   ├── AddRecipeForm.jsx    # Form component for adding recipes
 │   │   ├── RecipeList.jsx       # Component to display recipes
 │   │   ├── SearchBar.jsx        # Search input component
+│   │   ├── FavoritesList.jsx    # Display user's favorite recipes
+│   │   ├── RecommendationsList.jsx # Personalized recipe recommendations
+│   │   ├── FavoriteButton.jsx   # Toggle favorite status component
 │   │   ├── RecipeDetails.jsx    # Detailed view of a single recipe
 │   │   ├── EditRecipeForm.jsx   # Form for editing existing recipes
 │   │   ├── DeleteRecipeButton.jsx # Button for deleting recipes
@@ -87,11 +92,26 @@ recipe-sharing-app/
 4. Clear the search using the "✕" button or by deleting the text
 5. View search results count and status
 
+### Managing Favorites
+
+1. **Add to Favorites**: Click the heart icon (🤍) on any recipe card or details page
+2. **Remove from Favorites**: Click the filled heart icon (❤️) to remove from favorites
+3. **View Favorites**: Your favorite recipes appear in the "My Favorites" section
+4. **Quick Remove**: Use the ❌ button in the favorites list to remove items
+
+### Personalized Recommendations
+
+1. **View Recommendations**: Check the "Recommended for You" section
+2. **Refresh Recommendations**: Click the "🔄 Refresh" button for new suggestions
+3. **How it Works**: Recommendations are based on your favorite recipes
+4. **No Favorites Yet**: Get random recipe suggestions until you add favorites
+
 ### Viewing Recipes
 
 All added recipes are automatically displayed in the right panel of the application. Each recipe shows:
 - Recipe title
 - Recipe description
+- Favorite button (heart icon)
 - Click hint to view details
 
 ### Viewing Recipe Details
@@ -99,6 +119,7 @@ All added recipes are automatically displayed in the right panel of the applicat
 1. Click on any recipe card to navigate to its detailed view
 2. The recipe details page shows the full recipe information
 3. Use the "Back to Recipes" button to return to the main page
+4. Toggle favorite status using the heart button
 
 ### Editing a Recipe
 
@@ -114,6 +135,28 @@ All added recipes are automatically displayed in the right panel of the applicat
 2. Click the "Delete Recipe" button
 3. Confirm the deletion in the confirmation dialog
 4. The recipe will be removed and you'll be redirected to the main page
+
+## Favorites and Recommendations Features
+
+### Favorites System
+- **Heart Icons**: Visual indicators for favorite status (🤍 = not favorited, ❤️ = favorited)
+- **Quick Toggle**: Click heart icons to add/remove favorites instantly
+- **Favorites List**: Dedicated section showing all your favorite recipes
+- **Remove Options**: Multiple ways to remove favorites (heart toggle or ❌ button)
+- **Persistent State**: Favorites are maintained during your session
+
+### Personalized Recommendations
+- **Smart Suggestions**: Recommendations based on your favorite recipes
+- **Dynamic Updates**: Recommendations change as you add/remove favorites
+- **Refresh Feature**: Get new recommendations with the refresh button
+- **Fallback Logic**: Random suggestions when no favorites exist
+- **Visual Distinction**: Recommendation cards have unique styling
+
+### Recommendation Algorithm
+- **Based on Favorites**: Suggests recipes you haven't favorited yet
+- **Random Selection**: Shuffles and selects up to 3 recommendations
+- **Real-time Updates**: Recommendations update when favorites change
+- **Performance Optimized**: Efficient filtering and selection
 
 ## Search and Filtering Features
 
@@ -150,6 +193,8 @@ const useRecipeStore = create((set, get) => ({
   recipes: [],                                    // Array of recipe objects
   searchTerm: '',                                 // Current search term
   filteredRecipes: [],                           // Filtered recipe results
+  favorites: [],                                 // Array of favorite recipe IDs
+  recommendations: [],                           // Recommended recipes
   
   // Recipe management actions
   addRecipe: (newRecipe) => {},                  // Function to add new recipe
@@ -160,7 +205,16 @@ const useRecipeStore = create((set, get) => ({
   // Search and filtering actions
   setSearchTerm: (term) => {},                   // Function to set search term
   filterRecipes: () => {},                       // Function to filter recipes
-  initializeFilteredRecipes: () => {}            // Function to initialize filtered recipes
+  initializeFilteredRecipes: () => {},           // Function to initialize filtered recipes
+  
+  // Favorites management actions
+  addFavorite: (recipeId) => {},                 // Function to add favorite
+  removeFavorite: (recipeId) => {},              // Function to remove favorite
+  toggleFavorite: (recipeId) => {},              // Function to toggle favorite
+  
+  // Recommendations actions
+  generateRecommendations: () => {},             // Function to generate recommendations
+  initializeRecommendations: () => {}            // Function to initialize recommendations
 }));
 ```
 
@@ -168,7 +222,7 @@ const useRecipeStore = create((set, get) => ({
 
 The application uses React Router for navigation:
 
-- `/` - Home page with recipe list, search bar, and add form
+- `/` - Home page with recipe list, search bar, favorites, recommendations, and add form
 - `/recipe/:recipeId` - Individual recipe details page
 
 ## Available Scripts
@@ -205,3 +259,10 @@ This project is open source and available under the [MIT License](LICENSE).
 - Search history and suggestions
 - Filter by cooking time or difficulty
 - Sort recipes by various criteria
+- Advanced recommendation algorithms
+- Recipe sharing between users
+- Favorite collections and folders
+- Recipe import/export functionality
+- Nutritional information
+- Recipe difficulty ratings
+- User profiles and preferences

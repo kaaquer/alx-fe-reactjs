@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
+import FavoriteButton from './FavoriteButton';
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
@@ -30,7 +31,10 @@ const RecipeDetails = () => {
         <button onClick={() => navigate('/')} className="back-button">
           ← Back to Recipes
         </button>
-        <h1>{recipe.title}</h1>
+        <div className="recipe-title-section">
+          <h1>{recipe.title}</h1>
+          <FavoriteButton recipeId={recipe.id} size="large" />
+        </div>
       </div>
       
       <div className="recipe-content">
