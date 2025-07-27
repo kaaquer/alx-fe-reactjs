@@ -1,20 +1,31 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
+import RecipeDetails from './components/RecipeDetails'
 
 function App() {
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>🍳 Recipe Sharing App</h1>
-        <p>Share and discover delicious recipes with Zustand state management</p>
-      </header>
-      
-      <main className="app-main">
-        <AddRecipeForm />
-        <RecipeList />
-      </main>
-    </div>
+    <Router>
+      <div className="app">
+        <header className="app-header">
+          <h1>🍳 Recipe Sharing App</h1>
+          <p>Share and discover delicious recipes with Zustand state management</p>
+        </header>
+        
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={
+              <>
+                <AddRecipeForm />
+                <RecipeList />
+              </>
+            } />
+            <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   )
 }
 

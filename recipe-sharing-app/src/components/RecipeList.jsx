@@ -1,7 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
 
 const RecipeList = () => {
   const recipes = useRecipeStore(state => state.recipes);
+  const navigate = useNavigate();
+
+  const handleRecipeClick = (recipeId) => {
+    navigate(`/recipe/${recipeId}`);
+  };
 
   return (
     <div className="recipe-list">
@@ -11,9 +17,16 @@ const RecipeList = () => {
       ) : (
         <div className="recipes-grid">
           {recipes.map(recipe => (
-            <div key={recipe.id} className="recipe-card">
+            <div 
+              key={recipe.id} 
+              className="recipe-card"
+              onClick={() => handleRecipeClick(recipe.id)}
+            >
               <h3>{recipe.title}</h3>
               <p>{recipe.description}</p>
+              <div className="recipe-card-footer">
+                <span className="click-hint">Click to view details</span>
+              </div>
             </div>
           ))}
         </div>

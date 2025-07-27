@@ -1,18 +1,23 @@
 # Recipe Sharing Application
 
-A modern React application for sharing and discovering recipes, built with Zustand for state management.
+A modern React application for sharing and discovering recipes, built with Zustand for state management and React Router for navigation.
 
 ## Features
 
 - **Add Recipes**: Simple form to add new recipes with title and description
 - **View Recipes**: Display all added recipes in a clean, card-based layout
+- **Recipe Details**: Click on any recipe to view its detailed information
+- **Edit Recipes**: Modify existing recipes with an inline edit form
+- **Delete Recipes**: Remove recipes with confirmation dialog
 - **State Management**: Uses Zustand for efficient state management
+- **Routing**: React Router for seamless navigation between views
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Modern UI**: Beautiful gradient design with smooth animations
 
 ## Tech Stack
 
 - **React 18**: Latest React with hooks and modern features
+- **React Router DOM**: Client-side routing for navigation
 - **Vite**: Fast build tool and development server
 - **Zustand**: Lightweight state management library
 - **CSS3**: Modern styling with gradients and animations
@@ -25,8 +30,11 @@ recipe-sharing-app/
 │   ├── components/
 │   │   ├── AddRecipeForm.jsx    # Form component for adding recipes
 │   │   ├── RecipeList.jsx       # Component to display recipes
+│   │   ├── RecipeDetails.jsx    # Detailed view of a single recipe
+│   │   ├── EditRecipeForm.jsx   # Form for editing existing recipes
+│   │   ├── DeleteRecipeButton.jsx # Button for deleting recipes
 │   │   └── recipeStore.js       # Zustand store configuration
-│   ├── App.jsx                  # Main application component
+│   ├── App.jsx                  # Main application component with routing
 │   ├── App.css                  # Application styles
 │   ├── index.css                # Global styles
 │   └── main.jsx                 # Application entry point
@@ -74,6 +82,28 @@ recipe-sharing-app/
 All added recipes are automatically displayed in the right panel of the application. Each recipe shows:
 - Recipe title
 - Recipe description
+- Click hint to view details
+
+### Viewing Recipe Details
+
+1. Click on any recipe card to navigate to its detailed view
+2. The recipe details page shows the full recipe information
+3. Use the "Back to Recipes" button to return to the main page
+
+### Editing a Recipe
+
+1. Navigate to the recipe details page
+2. Click the "Edit Recipe" button
+3. Modify the title and/or description
+4. Click "Save Changes" to update the recipe
+5. Click "Cancel" to discard changes
+
+### Deleting a Recipe
+
+1. Navigate to the recipe details page
+2. Click the "Delete Recipe" button
+3. Confirm the deletion in the confirmation dialog
+4. The recipe will be removed and you'll be redirected to the main page
 
 ## State Management with Zustand
 
@@ -88,11 +118,20 @@ The application uses Zustand for state management, providing:
 
 ```javascript
 const useRecipeStore = create(set => ({
-  recipes: [],                    // Array of recipe objects
-  addRecipe: (newRecipe) => {},   // Function to add new recipe
-  setRecipes: (recipes) => {}     // Function to set all recipes
+  recipes: [],                                    // Array of recipe objects
+  addRecipe: (newRecipe) => {},                  // Function to add new recipe
+  updateRecipe: (recipeId, updatedRecipe) => {}, // Function to update recipe
+  deleteRecipe: (recipeId) => {},                // Function to delete recipe
+  setRecipes: (recipes) => {}                    // Function to set all recipes
 }));
 ```
+
+## Routing
+
+The application uses React Router for navigation:
+
+- `/` - Home page with recipe list and add form
+- `/recipe/:recipeId` - Individual recipe details page
 
 ## Available Scripts
 
@@ -122,3 +161,6 @@ This project is open source and available under the [MIT License](LICENSE).
 - User authentication
 - Recipe sharing via social media
 - Print-friendly recipe cards
+- Recipe ingredients and instructions
+- Cooking time and difficulty level
+- Recipe favorites and collections
