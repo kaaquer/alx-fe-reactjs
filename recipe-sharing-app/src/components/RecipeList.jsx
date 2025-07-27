@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
 
 const RecipeList = () => {
@@ -47,17 +47,19 @@ const RecipeList = () => {
       ) : (
         <div className="recipes-grid">
           {displayRecipes.map(recipe => (
-            <div 
+            <Link 
               key={recipe.id} 
-              className="recipe-card"
-              onClick={() => handleRecipeClick(recipe.id)}
+              to={`/recipe/${recipe.id}`}
+              className="recipe-card-link"
             >
-              <h3>{recipe.title}</h3>
-              <p>{recipe.description}</p>
-              <div className="recipe-card-footer">
-                <span className="click-hint">Click to view details</span>
+              <div className="recipe-card">
+                <h3>{recipe.title}</h3>
+                <p>{recipe.description}</p>
+                <div className="recipe-card-footer">
+                  <span className="click-hint">Click to view details</span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

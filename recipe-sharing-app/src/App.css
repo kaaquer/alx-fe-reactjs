@@ -160,6 +160,16 @@
   gap: 1rem;
 }
 
+.recipe-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.recipe-card-link:hover {
+  text-decoration: none;
+}
+
 .recipe-card {
   padding: 1.5rem;
   border: 2px solid #e1e5e9;
