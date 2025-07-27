@@ -3,6 +3,7 @@ import './App.css'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
 import RecipeDetails from './components/RecipeDetails'
+import SearchBar from './components/SearchBar'
 
 function App() {
   return (
@@ -16,10 +17,15 @@ function App() {
         <main className="app-main">
           <Routes>
             <Route path="/" element={
-              <>
-                <AddRecipeForm />
-                <RecipeList />
-              </>
+              <div className="home-page">
+                <div className="left-panel">
+                  <AddRecipeForm />
+                </div>
+                <div className="right-panel">
+                  <SearchBar />
+                  <RecipeList />
+                </div>
+              </div>
             } />
             <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
           </Routes>

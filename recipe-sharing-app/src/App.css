@@ -32,12 +32,173 @@
 }
 
 .app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Home Page Layout */
+.home-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
 }
 
+.left-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Search Bar Styles */
+.search-bar {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.clear-search-button {
+  position: absolute;
+  right: 0.5rem;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.clear-search-button:hover {
+  background: #5a6268;
+}
+
+.search-info {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #667eea;
+  font-weight: 500;
+}
+
+/* Recipe List Enhanced Styles */
+.recipe-list {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.recipe-list h2 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.search-results-info {
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.search-results-info p {
+  margin: 0;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.no-recipes {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.no-recipes p {
+  margin: 0;
+  font-style: italic;
+}
+
+.recipes-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.recipe-card {
+  padding: 1.5rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.recipe-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.recipe-card p {
+  margin: 0 0 1rem 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+.recipe-card-footer {
+  border-top: 1px solid #e1e5e9;
+  padding-top: 0.5rem;
+}
+
+.click-hint {
+  font-size: 0.8rem;
+  color: #667eea;
+  font-style: italic;
+}
+
+/* Add Recipe Form Styles */
 .add-recipe-form {
   background: white;
   padding: 2rem;
@@ -101,68 +262,6 @@
 .add-recipe-form button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.recipe-list {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e1e5e9;
-}
-
-.recipe-list h2 {
-  margin: 0 0 1.5rem 0;
-  color: #333;
-  font-size: 1.5rem;
-}
-
-.recipe-list p {
-  color: #666;
-  font-style: italic;
-}
-
-.recipes-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.recipe-card {
-  padding: 1.5rem;
-  border: 2px solid #e1e5e9;
-  border-radius: 8px;
-  background: #f8f9fa;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.recipe-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #667eea;
-}
-
-.recipe-card h3 {
-  margin: 0 0 0.5rem 0;
-  color: #333;
-  font-size: 1.2rem;
-}
-
-.recipe-card p {
-  margin: 0 0 1rem 0;
-  color: #666;
-  line-height: 1.5;
-}
-
-.recipe-card-footer {
-  border-top: 1px solid #e1e5e9;
-  padding-top: 0.5rem;
-}
-
-.click-hint {
-  font-size: 0.8rem;
-  color: #667eea;
-  font-style: italic;
 }
 
 /* Recipe Details Styles */
@@ -359,8 +458,9 @@
   margin-bottom: 1.5rem;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-  .app-main {
+  .home-page {
     grid-template-columns: 1fr;
   }
   
@@ -382,5 +482,15 @@
   
   .confirmation-actions {
     flex-direction: column;
+  }
+  
+  .search-input-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .clear-search-button {
+    position: static;
+    align-self: flex-end;
   }
 }
