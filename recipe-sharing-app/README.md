@@ -24,8 +24,8 @@ recipe-sharing-app/
 ├── src/
 │   ├── components/
 │   │   ├── AddRecipeForm.jsx    # Form component for adding recipes
-│   │   └── RecipeList.jsx       # Component to display recipes
-│   ├── recipeStore.js           # Zustand store configuration
+│   │   ├── RecipeList.jsx       # Component to display recipes
+│   │   └── recipeStore.js       # Zustand store configuration
 │   ├── App.jsx                  # Main application component
 │   ├── App.css                  # Application styles
 │   ├── index.css                # Global styles
