@@ -1,9 +1,15 @@
 import React from 'react';
 import './UserCard.css';
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, onClick }) => {
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <div className="user-card">
+    <div className="user-card" onClick={handleCardClick}>
       <div className="user-avatar">
         <img src={user.avatar_url} alt={`${user.login} avatar`} />
       </div>
@@ -33,6 +39,7 @@ const UserCard = ({ user }) => {
           target="_blank"
           rel="noopener noreferrer"
           className="github-link"
+          onClick={(e) => e.stopPropagation()}
         >
           View Profile on GitHub
         </a>

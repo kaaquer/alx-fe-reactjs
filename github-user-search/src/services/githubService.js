@@ -48,6 +48,17 @@ export const githubService = {
     }
   },
 
+  // Fetch user data - required function for the system
+  fetchUserData: async (username) => {
+    try {
+      const response = await githubApi.get(`/users/${username}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      throw error;
+    }
+  },
+
   // Test API connection
   testApiConnection: async () => {
     try {

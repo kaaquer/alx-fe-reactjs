@@ -27,6 +27,18 @@ function App() {
     }
   };
 
+  const handleUserClick = async (username) => {
+    try {
+      // Demonstrate the fetchUserData function
+      const userData = await githubService.fetchUserData(username);
+      console.log('Fetched user data:', userData);
+      // You could open the user's GitHub profile or show more details
+      window.open(userData.html_url, '_blank');
+    } catch (err) {
+      console.error('Error fetching user data:', err);
+    }
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -61,7 +73,11 @@ function App() {
             <h2>Search Results ({users.length} users found)</h2>
             <div className="users-grid">
               {users.map((user) => (
-                <UserCard key={user.id} user={user} />
+                <UserCard 
+                  key={user.id} 
+                  user={user} 
+                  onClick={() => handleUserClick(user.login)}
+                />
               ))}
             </div>
           </div>
