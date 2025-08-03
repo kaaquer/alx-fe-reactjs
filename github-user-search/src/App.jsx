@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import SearchBar from './components/SearchBar';
+import Search from './components/Search';
 import UserCard from './components/UserCard';
-import { githubApiService } from './services/githubApi';
+import ApiTest from './components/ApiTest';
+import { githubService } from './services/githubService';
 import './App.css';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
     setSearched(true);
 
     try {
-      const result = await githubApiService.searchUsers(query);
+      const result = await githubService.searchUsers(query);
       setUsers(result.items || []);
     } catch (err) {
       setError('Failed to search users. Please try again.');
@@ -34,7 +35,8 @@ function App() {
       </header>
 
       <main className="app-main">
-        <SearchBar onSearch={handleSearch} />
+        <ApiTest />
+        <Search onSearch={handleSearch} />
         
         {loading && (
           <div className="loading">
