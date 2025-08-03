@@ -49,47 +49,19 @@ body {
   width: 100%;
 }
 
-.loading, .error, .no-results {
+.search-info {
   text-align: center;
-  padding: 40px 20px;
+  padding: 20px;
+  margin: 20px 0;
   background: white;
   border-radius: 12px;
-  margin: 20px 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.loading p {
-  font-size: 1.1rem;
+.search-info p {
+  margin: 0;
   color: #586069;
-}
-
-.error p {
-  font-size: 1.1rem;
-  color: #d73a49;
-}
-
-.no-results p {
-  font-size: 1.1rem;
-  color: #586069;
-}
-
-.results {
-  margin-top: 20px;
-}
-
-.results h2 {
-  text-align: center;
-  color: white;
-  margin-bottom: 30px;
-  font-size: 1.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.users-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
+  font-size: 16px;
 }
 
 @media (max-width: 768px) {
@@ -99,11 +71,6 @@ body {
   
   .app-header p {
     font-size: 1rem;
-  }
-  
-  .users-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
   }
   
   .app-main {
@@ -118,10 +85,6 @@ body {
   
   .app-header h1 {
     font-size: 1.8rem;
-  }
-  
-  .results h2 {
-    font-size: 1.3rem;
   }
 }
 
