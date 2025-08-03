@@ -1,0 +1,104 @@
+.user-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin: 16px 0;
+  display: flex;
+  gap: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.user-avatar {
+  flex-shrink: 0;
+}
+
+.user-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f0f0;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #24292e;
+}
+
+.user-full-name {
+  margin: 0;
+  font-size: 16px;
+  color: #586069;
+  font-weight: 500;
+}
+
+.user-bio {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #586069;
+  line-height: 1.5;
+}
+
+.user-stats {
+  display: flex;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.stat {
+  font-size: 14px;
+  color: #586069;
+}
+
+.stat strong {
+  color: #24292e;
+}
+
+.github-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: #0366d6;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+}
+
+.github-link:hover {
+  background: #0256b3;
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .user-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .user-stats {
+    justify-content: center;
+  }
+  
+  .github-link {
+    align-self: center;
+  }
+} 
