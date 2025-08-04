@@ -1,0 +1,162 @@
+.api-test-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.api-test-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.api-test-header:hover {
+  background-color: #f6f8fa;
+}
+
+.api-test-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #24292e;
+}
+
+.api-status {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f6f8fa;
+  color: #586069;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #586069;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.expand-button:hover {
+  background-color: #e1e4e8;
+}
+
+.api-test-details {
+  padding: 20px;
+}
+
+.rate-limit-section h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #24292e;
+}
+
+.rate-limit-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rate-limit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f6f8fa;
+  border-radius: 8px;
+}
+
+.rate-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #24292e;
+  min-width: 80px;
+}
+
+.rate-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #586069;
+  min-width: 60px;
+}
+
+.rate-bar {
+  flex: 1;
+  height: 8px;
+  background: #e1e4e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rate-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.reset-info {
+  margin: 16px 0;
+  padding: 12px;
+  background: #f6f8fa;
+  border-radius: 8px;
+}
+
+.reset-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #586069;
+}
+
+.api-features h4 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #24292e;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.features-list li {
+  font-size: 14px;
+  color: #586069;
+  padding: 4px 0;
+}
+
+@media (max-width: 768px) {
+  .api-test-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .rate-limit-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .rate-bar {
+    width: 100%;
+  }
+  
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+} 
