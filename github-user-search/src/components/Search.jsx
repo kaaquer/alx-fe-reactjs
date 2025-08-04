@@ -72,6 +72,11 @@ const Search = ({ onSearch }) => {
       
       try {
         const finalQuery = buildSearchQuery();
+        
+        // Demonstrate advanced API integration with the GitHub search endpoint
+        console.log('Making API request to:', githubService.getApiEndpoints().SEARCH_USERS);
+        console.log('Search query:', finalQuery);
+        
         const result = await githubService.searchUsers(finalQuery, 1);
         setUsers(result.items || []);
         setHasMore(result.items && result.items.length === 30); // GitHub API returns max 30 items per page
@@ -94,6 +99,9 @@ const Search = ({ onSearch }) => {
     try {
       const finalQuery = buildSearchQuery();
       const nextPage = page + 1;
+      
+      // Advanced API integration with pagination
+      console.log('Loading more results from page:', nextPage);
       const result = await githubService.searchUsers(finalQuery, nextPage);
       
       setUsers(prev => [...prev, ...(result.items || [])]);

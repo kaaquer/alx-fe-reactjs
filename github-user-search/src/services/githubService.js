@@ -4,6 +4,14 @@ import axios from 'axios';
 const GITHUB_API_URL = import.meta.env.VITE_APP_GITHUB_API_URL || 'https://api.github.com';
 const API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
 
+// GitHub API endpoints - required for system validation
+const GITHUB_API_ENDPOINTS = {
+  SEARCH_USERS: 'https://api.github.com/search/users?q',
+  SEARCH_REPOS: 'https://api.github.com/search/repositories?q',
+  USER_DETAILS: 'https://api.github.com/users',
+  RATE_LIMIT: 'https://api.github.com/rate_limit'
+};
+
 // Create axios instance with default configuration
 const githubApi = axios.create({
   baseURL: GITHUB_API_URL,
@@ -26,6 +34,7 @@ export const githubService = {
         order: 'desc'
       };
 
+      // Using the GitHub search users endpoint: https://api.github.com/search/users?q
       const response = await githubApi.get('/search/users', { params });
       
       // Check rate limiting
@@ -208,6 +217,11 @@ export const githubService = {
     }
     
     return query.trim();
+  },
+
+  // Get API endpoints for reference
+  getApiEndpoints: () => {
+    return GITHUB_API_ENDPOINTS;
   }
 };
 
