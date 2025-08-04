@@ -8,6 +8,17 @@ const Search = ({ onSearch }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // fetchUserData function - required by the system
+  const fetchUserData = async (username) => {
+    try {
+      const response = await githubService.fetchUserData(username);
+      return response;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (query.trim()) {
@@ -26,6 +37,16 @@ const Search = ({ onSearch }) => {
       } finally {
         setLoading(false);
       }
+    }
+  };
+
+  const handleUserClick = async (username) => {
+    try {
+      const userData = await fetchUserData(username);
+      console.log('Fetched user data:', userData);
+      window.open(userData.html_url, '_blank');
+    } catch (err) {
+      console.error('Error fetching user data:', err);
     }
   };
 
@@ -70,7 +91,7 @@ const Search = ({ onSearch }) => {
           <h3>Search Results ({users.length} users found)</h3>
           <div className="users-list">
             {users.map((user) => (
-              <div key={user.id} className="user-item">
+              <div key={user.id} className="user-item" onClick={() => handleUserClick(user.login)}>
                 <img 
                   src={user.avatar_url} 
                   alt={`${user.login} avatar`} 
@@ -84,6 +105,7 @@ const Search = ({ onSearch }) => {
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="user-link"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     View Profile
                   </a>
