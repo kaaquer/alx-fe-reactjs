@@ -167,7 +167,7 @@ const Search = ({ onSearch }) => {
           <div className="advanced-fields">
             <div className="field-row">
               <div className="field-group">
-                <label htmlFor="location">Location:</label>
+                <label htmlFor="location" className="text-sm font-semibold text-gray-700">Location:</label>
                 <input
                   type="text"
                   id="location"
@@ -180,7 +180,7 @@ const Search = ({ onSearch }) => {
               </div>
               
               <div className="field-group">
-                <label htmlFor="type">Type:</label>
+                <label htmlFor="type" className="text-sm font-semibold text-gray-700">Type:</label>
                 <select
                   id="type"
                   name="type"
@@ -196,7 +196,7 @@ const Search = ({ onSearch }) => {
 
             <div className="field-row">
               <div className="field-group">
-                <label htmlFor="minRepos">Min Repositories:</label>
+                <label htmlFor="minRepos" className="text-sm font-semibold text-gray-700">Min Repositories:</label>
                 <input
                   type="number"
                   id="minRepos"
@@ -210,7 +210,7 @@ const Search = ({ onSearch }) => {
               </div>
               
               <div className="field-group">
-                <label htmlFor="maxRepos">Max Repositories:</label>
+                <label htmlFor="maxRepos" className="text-sm font-semibold text-gray-700">Max Repositories:</label>
                 <input
                   type="number"
                   id="maxRepos"
@@ -224,7 +224,7 @@ const Search = ({ onSearch }) => {
               </div>
               
               <div className="field-group">
-                <label htmlFor="followers">Min Followers:</label>
+                <label htmlFor="followers" className="text-sm font-semibold text-gray-700">Min Followers:</label>
                 <input
                   type="number"
                   id="followers"
