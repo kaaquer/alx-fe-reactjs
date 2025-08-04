@@ -24,7 +24,7 @@ const Search = ({ onSearch }) => {
       const response = await githubService.fetchUserData(username);
       return response;
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      // Production error handling - no console logs
       throw error;
     }
   };
@@ -72,11 +72,6 @@ const Search = ({ onSearch }) => {
       
       try {
         const finalQuery = buildSearchQuery();
-        
-        // Demonstrate advanced API integration with the GitHub search endpoint
-        console.log('Making API request to:', githubService.getApiEndpoints().SEARCH_USERS);
-        console.log('Search query:', finalQuery);
-        
         const result = await githubService.searchUsers(finalQuery, 1);
         setUsers(result.items || []);
         setHasMore(result.items && result.items.length === 30); // GitHub API returns max 30 items per page
@@ -85,7 +80,6 @@ const Search = ({ onSearch }) => {
         }
       } catch (err) {
         setError('Failed to search users. Please try again.');
-        console.error('Search error:', err);
       } finally {
         setLoading(false);
       }
@@ -99,9 +93,6 @@ const Search = ({ onSearch }) => {
     try {
       const finalQuery = buildSearchQuery();
       const nextPage = page + 1;
-      
-      // Advanced API integration with pagination
-      console.log('Loading more results from page:', nextPage);
       const result = await githubService.searchUsers(finalQuery, nextPage);
       
       setUsers(prev => [...prev, ...(result.items || [])]);
@@ -109,7 +100,6 @@ const Search = ({ onSearch }) => {
       setHasMore(result.items && result.items.length === 30);
     } catch (err) {
       setError('Failed to load more users.');
-      console.error('Load more error:', err);
     } finally {
       setLoading(false);
     }
@@ -118,10 +108,9 @@ const Search = ({ onSearch }) => {
   const handleUserClick = async (username) => {
     try {
       const userData = await fetchUserData(username);
-      console.log('Fetched user data:', userData);
       window.open(userData.html_url, '_blank');
     } catch (err) {
-      console.error('Error fetching user data:', err);
+      setError('Failed to fetch user details.');
     }
   };
 
@@ -291,6 +280,7 @@ const Search = ({ onSearch }) => {
                   src={user.avatar_url} 
                   alt={`${user.login} avatar`} 
                   className="user-avatar"
+                  loading="lazy"
                 />
                 <div className="user-info">
                   <h4 className="user-login">{user.login}</h4>

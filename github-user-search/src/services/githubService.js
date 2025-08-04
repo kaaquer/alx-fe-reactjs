@@ -18,7 +18,8 @@ const githubApi = axios.create({
   headers: {
     'Accept': 'application/vnd.github.v3+json',
     ...(API_KEY && { 'Authorization': `token ${API_KEY}` })
-  }
+  },
+  timeout: 10000 // 10 second timeout for production
 });
 
 // GitHub API service functions
@@ -40,13 +41,11 @@ export const githubService = {
       // Check rate limiting
       const rateLimit = response.headers['x-ratelimit-remaining'];
       if (rateLimit && parseInt(rateLimit) < 10) {
-        console.warn(`API rate limit warning: ${rateLimit} requests remaining`);
+        // Production: silently handle rate limit warnings
       }
       
       return response.data;
     } catch (error) {
-      console.error('Error searching users:', error);
-      
       // Handle specific error cases
       if (error.response?.status === 403) {
         throw new Error('Rate limit exceeded. Please try again later.');
@@ -54,9 +53,11 @@ export const githubService = {
         throw new Error('Invalid search query. Please check your search parameters.');
       } else if (error.response?.status === 404) {
         throw new Error('Search endpoint not found.');
+      } else if (error.code === 'ECONNABORTED') {
+        throw new Error('Request timeout. Please try again.');
       }
       
-      throw error;
+      throw new Error('An error occurred while searching users.');
     }
   },
 
@@ -66,13 +67,11 @@ export const githubService = {
       const response = await githubApi.get(`/users/${username}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching user details:', error);
-      
       if (error.response?.status === 404) {
         throw new Error('User not found.');
       }
       
-      throw error;
+      throw new Error('Failed to fetch user details.');
     }
   },
 
@@ -89,8 +88,7 @@ export const githubService = {
       const response = await githubApi.get(`/users/${username}/repos`, { params });
       return response.data;
     } catch (error) {
-      console.error('Error fetching user repositories:', error);
-      throw error;
+      throw new Error('Failed to fetch user repositories.');
     }
   },
 
@@ -100,8 +98,7 @@ export const githubService = {
       const response = await githubApi.get(`/users/${username}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw error;
+      throw new Error('Failed to fetch user data.');
     }
   },
 
@@ -116,8 +113,7 @@ export const githubService = {
       const response = await githubApi.get(`/users/${username}/followers`, { params });
       return response.data;
     } catch (error) {
-      console.error('Error fetching user followers:', error);
-      throw error;
+      throw new Error('Failed to fetch user followers.');
     }
   },
 
@@ -132,8 +128,7 @@ export const githubService = {
       const response = await githubApi.get(`/users/${username}/following`, { params });
       return response.data;
     } catch (error) {
-      console.error('Error fetching user following:', error);
-      throw error;
+      throw new Error('Failed to fetch user following.');
     }
   },
 
@@ -151,8 +146,7 @@ export const githubService = {
       const response = await githubApi.get('/search/repositories', { params });
       return response.data;
     } catch (error) {
-      console.error('Error searching repositories:', error);
-      throw error;
+      throw new Error('Failed to search repositories.');
     }
   },
 
@@ -162,8 +156,7 @@ export const githubService = {
       const response = await githubApi.get('/rate_limit');
       return response.data;
     } catch (error) {
-      console.error('Error fetching rate limit:', error);
-      throw error;
+      throw new Error('Failed to fetch rate limit information.');
     }
   },
 
@@ -173,8 +166,7 @@ export const githubService = {
       const response = await githubApi.get('/rate_limit');
       return response.data;
     } catch (error) {
-      console.error('Error testing API connection:', error);
-      throw error;
+      throw new Error('Failed to connect to GitHub API.');
     }
   },
 
