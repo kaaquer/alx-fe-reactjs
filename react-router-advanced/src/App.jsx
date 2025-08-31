@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
 import './App.css';
+import useAuth from './hooks/useAuth';
 
 // Components
 import Header from './components/Header';
@@ -13,31 +13,20 @@ import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './components/NotFound';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
-
-  const handleLogin = (userData) => {
-    setIsAuthenticated(true);
-    setUser(userData);
-  };
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setUser(null);
-  };
+  const { isAuthenticated, user, login, logout } = useAuth();
 
   return (
     <Router>
       <div className="App">
-        <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} user={user} />
+        <Header isAuthenticated={isAuthenticated} onLogout={logout} user={user} />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/login" element={<Login onLogin={login} />} />
             <Route 
               path="/profile/*" 
               element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ProtectedRoute>
                   <Profile user={user} />
                 </ProtectedRoute>
               } 
@@ -47,7 +36,7 @@ function App() {
             <Route 
               path="/protected-blog/:id" 
               element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <ProtectedRoute>
                   <BlogPost />
                 </ProtectedRoute>
               } 
