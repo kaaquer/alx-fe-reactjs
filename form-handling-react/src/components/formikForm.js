@@ -4,29 +4,25 @@ import * as Yup from 'yup';
 import './FormikForm.css';
 
 // Validation schema using Yup
-const validationSchema = Yup.object().shape({
-  username: Yup.string()
+const validationSchema = Yup.object({
+  username: Yup.string().required('Username is required')
     .min(3, 'Username must be at least 3 characters long')
     .max(20, 'Username must be less than 20 characters')
-    .required('Username is required')
     .matches(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
   
-  email: Yup.string()
-    .email('Please enter a valid email address')
-    .required('Email is required'),
+  email: Yup.string().required('Email is required')
+    .email('Please enter a valid email address'),
   
-  password: Yup.string()
+  password: Yup.string().required('Password is required')
     .min(6, 'Password must be at least 6 characters long')
     .max(50, 'Password must be less than 50 characters')
-    .required('Password is required')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
       'Password must contain at least one uppercase letter, one lowercase letter, and one number'
     ),
   
-  confirmPassword: Yup.string()
+  confirmPassword: Yup.string().required('Please confirm your password')
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Please confirm your password')
 });
 
 const FormikForm = () => {
@@ -97,7 +93,7 @@ const FormikForm = () => {
                 placeholder="Enter your username"
                 className={touched.username && errors.username ? 'error' : ''}
               />
-              <ErrorMessage name="username" component="span" className="error-message" />
+              <ErrorMessage name="username" component="div" className="error-message" />
             </div>
 
             <div className="form-group">
@@ -109,7 +105,7 @@ const FormikForm = () => {
                 placeholder="Enter your email"
                 className={touched.email && errors.email ? 'error' : ''}
               />
-              <ErrorMessage name="email" component="span" className="error-message" />
+              <ErrorMessage name="email" component="div" className="error-message" />
             </div>
 
             <div className="form-group">
@@ -121,7 +117,7 @@ const FormikForm = () => {
                 placeholder="Enter your password"
                 className={touched.password && errors.password ? 'error' : ''}
               />
-              <ErrorMessage name="password" component="span" className="error-message" />
+              <ErrorMessage name="password" component="div" className="error-message" />
             </div>
 
             <div className="form-group">
@@ -133,7 +129,7 @@ const FormikForm = () => {
                 placeholder="Confirm your password"
                 className={touched.confirmPassword && errors.confirmPassword ? 'error' : ''}
               />
-              <ErrorMessage name="confirmPassword" component="span" className="error-message" />
+              <ErrorMessage name="confirmPassword" component="div" className="error-message" />
             </div>
 
             <button 
