@@ -26,6 +26,8 @@ const PostsComponent = () => {
     queryFn: fetchPosts,
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnWindowFocus: true,
+    keepPreviousData: true,
   });
 
   const togglePosts = () => {
@@ -72,6 +74,13 @@ const PostsComponent = () => {
           >
             {isFetching ? 'Refreshing...' : 'Refresh Posts'}
           </button>
+          <button 
+            onClick={() => refetch()} 
+            className="refetch-btn"
+            disabled={isFetching}
+          >
+            {isFetching ? 'Fetching...' : 'Refetch Data'}
+          </button>
           <div className="status">
             {isFetching && <span className="fetching">Fetching...</span>}
             <span className="count">Total Posts: {posts?.length || 0}</span>
@@ -101,9 +110,11 @@ const PostsComponent = () => {
             <li>✅ <strong>Caching:</strong> Data is cached for 5 minutes (staleTime)</li>
             <li>✅ <strong>Background Updates:</strong> Data refreshes in background</li>
             <li>✅ <strong>Error Handling:</strong> Graceful error display with retry</li>
-            <li>✅ <strong>Manual Refetch:</strong> Click "Refresh Posts" to refetch data</li>
+            <li>✅ <strong>Manual Refetch:</strong> Multiple buttons to refetch data</li>
             <li>✅ <strong>Loading States:</strong> Different states for initial load vs refetch</li>
             <li>✅ <strong>Component Toggle:</strong> Hide/Show posts to test caching</li>
+            <li>✅ <strong>Window Focus Refetch:</strong> Data refetches when window gains focus</li>
+            <li>✅ <strong>Keep Previous Data:</strong> Previous data shown while fetching new data</li>
           </ul>
           <p className="cache-info">
             <strong>Cache Test:</strong> Try hiding posts, then showing them again - they should load instantly from cache!

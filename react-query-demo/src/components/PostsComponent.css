@@ -29,7 +29,7 @@
   flex-wrap: wrap;
 }
 
-.toggle-btn, .refresh-btn {
+.toggle-btn, .refresh-btn, .refetch-btn {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -42,13 +42,13 @@
   backdrop-filter: blur(10px);
 }
 
-.toggle-btn:hover, .refresh-btn:hover:not(:disabled) {
+.toggle-btn:hover, .refresh-btn:hover:not(:disabled), .refetch-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
 }
 
-.refresh-btn:disabled {
+.refresh-btn:disabled, .refetch-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
