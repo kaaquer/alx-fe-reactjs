@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RegistrationForm from './components/RegistrationForm';
-import FormikForm from './components/formikForm';
+import FormikForm from './components/formikForm.jsx';
 import './App.css';
 
 function App() {
