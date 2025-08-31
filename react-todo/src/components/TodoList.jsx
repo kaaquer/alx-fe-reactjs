@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TodoList.css';
+import AddTodoForm from './AddTodoForm.jsx';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
@@ -7,19 +8,14 @@ const TodoList = () => {
     { id: 2, text: 'Build a Todo App', completed: false },
     { id: 3, text: 'Write Tests', completed: false }
   ]);
-  const [newTodo, setNewTodo] = useState('');
 
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (newTodo.trim() !== '') {
-      const todo = {
-        id: Date.now(),
-        text: newTodo.trim(),
-        completed: false
-      };
-      setTodos([...todos, todo]);
-      setNewTodo('');
-    }
+  const addTodo = (todoText) => {
+    const todo = {
+      id: Date.now(),
+      text: todoText,
+      completed: false
+    };
+    setTodos([...todos, todo]);
   };
 
   const toggleTodo = (id) => {
@@ -36,16 +32,7 @@ const TodoList = () => {
     <div className="todo-list">
       <h1>Todo List</h1>
       
-      <form onSubmit={addTodo} className="add-todo-form">
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add a new todo..."
-          className="todo-input"
-        />
-        <button type="submit" className="add-button">Add Todo</button>
-      </form>
+      <AddTodoForm onAddTodo={addTodo} />
 
       <ul className="todos">
         {todos.map(todo => (

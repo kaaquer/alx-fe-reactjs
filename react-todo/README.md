@@ -15,12 +15,18 @@ A fully functional Todo List application built with React, featuring comprehensi
 ### TodoList Component
 The main component that manages the todo list functionality:
 
-- **State Management**: Uses React hooks (`useState`) to manage todos and form input
+- **State Management**: Uses React hooks (`useState`) to manage todos
 - **Initial State**: Comes with 3 demo todos: "Learn React", "Build a Todo App", "Write Tests"
 - **Methods**:
   - `addTodo()`: Adds a new todo to the list
   - `toggleTodo()`: Toggles the completion status of a todo
   - `deleteTodo()`: Removes a todo from the list
+
+### AddTodoForm Component
+A separate component for adding new todos:
+
+- **Props**: `onAddTodo` - callback function to add a new todo
+- **Features**: Form validation, Enter key support, input clearing after submission
 
 ## Testing
 
@@ -68,11 +74,12 @@ npm test -- --watchAll=false
 react-todo/
 ├── src/
 │   ├── components/
-│   │   ├── TodoList.js          # Main TodoList component
+│   │   ├── TodoList.jsx         # Main TodoList component
+│   │   ├── AddTodoForm.jsx      # AddTodoForm component
 │   │   └── TodoList.css         # Component styles
 │   ├── __tests__/
 │   │   └── TodoList.test.js     # Comprehensive test suite
-│   ├── App.js                   # Main App component
+│   ├── App.jsx                  # Main App component
 │   └── index.js                 # Application entry point
 ├── package.json
 └── README.md
