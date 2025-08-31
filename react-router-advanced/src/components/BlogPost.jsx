@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 
 const BlogPost = () => {
-  const { postId } = useParams();
+  const { id } = useParams();
 
   // Sample blog posts data (in a real app, this would come from an API)
   const blogPosts = {
@@ -118,7 +118,7 @@ function App() {
     }
   };
 
-  const post = blogPosts[postId];
+  const post = blogPosts[id];
 
   // If post doesn't exist, redirect to 404
   if (!post) {
@@ -148,16 +148,16 @@ function App() {
         
         <div className="routing-demo">
           <h4>Dynamic Routing Demo</h4>
-          <p>Current Post ID: <strong>{postId}</strong></p>
+                     <p>Current Post ID: <strong>{id}</strong></p>
           <p>Try changing the URL to see different posts:</p>
           <div className="demo-links">
-            {[1, 2, 3, 4, 5].map(id => (
+            {[1, 2, 3, 4, 5].map(postId => (
               <Link 
-                key={id} 
-                to={`/blog/${id}`} 
-                className={id === parseInt(postId) ? 'active' : ''}
+                key={postId} 
+                to={`/blog/${postId}`} 
+                className={postId === parseInt(id) ? 'active' : ''}
               >
-                Post {id}
+                Post {postId}
               </Link>
             ))}
           </div>

@@ -73,7 +73,7 @@ const Blog = () => {
         <h3>Dynamic Routing Demo</h3>
         <p>
           Notice how each blog post has a unique URL like <code>/blog/1</code>, <code>/blog/2</code>, etc. 
-          This is achieved using dynamic routing with the <code>:postId</code> parameter in the route definition.
+          This is achieved using dynamic routing with the <code>:id</code> parameter in the route definition.
         </p>
         <p>
           Try manually typing different URLs like <code>/blog/3</code> or <code>/blog/999</code> to see how 

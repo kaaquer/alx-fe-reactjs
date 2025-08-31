@@ -43,7 +43,15 @@ function App() {
               } 
             />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:postId" element={<BlogPost />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route 
+              path="/protected-blog/:id" 
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <BlogPost />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
