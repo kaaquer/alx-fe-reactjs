@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import './PostsComponent.css';
+import './CacheDemo.css';
 
 // Function to fetch posts from JSONPlaceholder API
 const fetchPosts = async () => {
@@ -11,7 +11,9 @@ const fetchPosts = async () => {
   return response.json();
 };
 
-const PostsComponent = () => {
+const CacheDemo = () => {
+  const [showPosts, setShowPosts] = useState(true);
+
   const {
     data: posts,
     isLoading,
@@ -26,9 +28,13 @@ const PostsComponent = () => {
     cacheTime: 10 * 60 * 1000, // 10 minutes
   });
 
+  const togglePosts = () => {
+    setShowPosts(!showPosts);
+  };
+
   if (isLoading) {
     return (
-      <div className="posts-container">
+      <div className="cache-demo">
         <div className="loading">
           <div className="spinner"></div>
           <p>Loading posts...</p>
@@ -39,7 +45,7 @@ const PostsComponent = () => {
 
   if (isError) {
     return (
-      <div className="posts-container">
+      <div className="cache-demo">
         <div className="error">
           <h3>Error loading posts</h3>
           <p>{error.message}</p>
@@ -52,16 +58,19 @@ const PostsComponent = () => {
   }
 
   return (
-    <div className="posts-container">
+    <div className="cache-demo">
       <div className="header">
-        <h1>Posts from JSONPlaceholder API</h1>
+        <h1>React Query Caching Demo</h1>
         <div className="controls">
+          <button onClick={togglePosts} className="toggle-btn">
+            {showPosts ? 'Hide Posts' : 'Show Posts'}
+          </button>
           <button 
             onClick={() => refetch()} 
             className="refresh-btn"
             disabled={isFetching}
           >
-            {isFetching ? 'Refreshing...' : 'Refresh Posts'}
+            {isFetching ? 'Refreshing...' : 'Refresh Data'}
           </button>
           <div className="status">
             {isFetching && <span className="fetching">Fetching...</span>}
@@ -70,35 +79,37 @@ const PostsComponent = () => {
         </div>
       </div>
 
-      <div className="posts-grid">
-        {posts?.map((post) => (
-          <div key={post.id} className="post-card">
-            <h3 className="post-title">{post.title}</h3>
-            <p className="post-body">{post.body}</p>
-            <div className="post-meta">
-              <span className="post-id">ID: {post.id}</span>
-              <span className="user-id">User ID: {post.userId}</span>
+      {showPosts && (
+        <div className="posts-grid">
+          {posts?.slice(0, 6).map((post) => (
+            <div key={post.id} className="post-card">
+              <h3 className="post-title">{post.title}</h3>
+              <p className="post-body">{post.body}</p>
+              <div className="post-meta">
+                <span className="post-id">ID: {post.id}</span>
+                <span className="user-id">User ID: {post.userId}</span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      <div className="info-panel">
-        <h3>React Query Features Demonstrated:</h3>
+      <div className="cache-info">
+        <h3>React Query Caching Demonstration:</h3>
         <ul>
-          <li>✅ <strong>Data Fetching:</strong> Automatic API calls with loading states</li>
-          <li>✅ <strong>Caching:</strong> Data is cached for 5 minutes (staleTime)</li>
+          <li>✅ <strong>Data Fetching:</strong> Initial API call with loading state</li>
+          <li>✅ <strong>Caching:</strong> Data cached for 5 minutes (staleTime)</li>
           <li>✅ <strong>Background Updates:</strong> Data refreshes in background</li>
           <li>✅ <strong>Error Handling:</strong> Graceful error display with retry</li>
-          <li>✅ <strong>Manual Refetch:</strong> Click "Refresh Posts" to refetch data</li>
-          <li>✅ <strong>Loading States:</strong> Different states for initial load vs refetch</li>
+          <li>✅ <strong>Manual Refetch:</strong> Click "Refresh Data" to refetch</li>
+          <li>✅ <strong>Component Toggle:</strong> Hide/Show posts to test caching</li>
         </ul>
-        <p className="cache-info">
-          <strong>Cache Info:</strong> Try navigating away and back to see cached data load instantly!
+        <p className="cache-tip">
+          <strong>Cache Test:</strong> Try hiding posts, then showing them again - they should load instantly from cache!
         </p>
       </div>
     </div>
   );
 };
 
-export default PostsComponent;
+export default CacheDemo;
