@@ -3,8 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import TodoList from './components/TodoList.jsx';
 
-describe('TodoList Component', () => {
-  // Test 1: Initial Render Test
+describe('TodoList', () => {
   test('renders TodoList component correctly', () => {
     render(<TodoList />);
     
@@ -31,7 +30,6 @@ describe('TodoList Component', () => {
     expect(deleteButtons).toHaveLength(3);
   });
 
-  // Test 2: Adding Todos Test
   test('can add a new todo', () => {
     render(<TodoList />);
     
@@ -79,7 +77,6 @@ describe('TodoList Component', () => {
     expect(screen.getByText('Enter Test Todo')).toBeInTheDocument();
   });
 
-  // Test 3: Toggling Todos Test
   test('can toggle todo completion status', () => {
     render(<TodoList />);
     
@@ -102,7 +99,6 @@ describe('TodoList Component', () => {
     expect(todoItem).not.toHaveClass('completed');
   });
 
-  // Test 4: Deleting Todos Test
   test('can delete a todo', () => {
     render(<TodoList />);
     
@@ -144,7 +140,6 @@ describe('TodoList Component', () => {
     expect(screen.getAllByText('Delete')).toHaveLength(1);
   });
 
-  // Test 5: Integration Tests
   test('can add, toggle, and delete todos in sequence', () => {
     render(<TodoList />);
     
