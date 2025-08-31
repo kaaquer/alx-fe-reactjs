@@ -29,7 +29,7 @@
   flex-wrap: wrap;
 }
 
-.refresh-btn {
+.toggle-btn, .refresh-btn {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -42,7 +42,7 @@
   backdrop-filter: blur(10px);
 }
 
-.refresh-btn:hover:not(:disabled) {
+.toggle-btn:hover, .refresh-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);

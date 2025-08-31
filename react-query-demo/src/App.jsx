@@ -1,6 +1,6 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import CacheDemo from './components/CacheDemo';
+import PostsComponent from './components/PostsComponent';
 import './App.css';
 
 // Create a client
@@ -17,7 +17,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="app">
-        <CacheDemo />
+        <PostsComponent />
       </div>
     </QueryClientProvider>
   );
