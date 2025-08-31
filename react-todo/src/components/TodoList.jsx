@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import './TodoList.css';
 import AddTodoForm from './AddTodoForm.jsx';
 
+// Static array of initial todos
+const initialTodos = [
+  { id: 1, text: 'Learn React', completed: false },
+  { id: 2, text: 'Build a Todo App', completed: false },
+  { id: 3, text: 'Write Tests', completed: false }
+];
+
 const TodoList = () => {
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Build a Todo App', completed: false },
-    { id: 3, text: 'Write Tests', completed: false }
-  ]);
+  const [todos, setTodos] = useState(initialTodos);
 
   const addTodo = (todoText) => {
     const todo = {

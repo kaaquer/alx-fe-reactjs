@@ -77,8 +77,7 @@ react-todo/
 │   │   ├── TodoList.jsx         # Main TodoList component
 │   │   ├── AddTodoForm.jsx      # AddTodoForm component
 │   │   └── TodoList.css         # Component styles
-│   ├── __tests__/
-│   │   └── TodoList.test.js     # Comprehensive test suite
+│   ├── TodoList.test.js         # Comprehensive test suite
 │   ├── App.jsx                  # Main App component
 │   └── index.js                 # Application entry point
 ├── package.json
