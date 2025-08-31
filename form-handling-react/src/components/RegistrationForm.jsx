@@ -40,14 +40,14 @@ const RegistrationForm = () => {
     const newErrors = {};
 
     // Username validation
-    if (!username.trim()) {
+    if (!username) {
       newErrors.username = 'Username is required';
     } else if (username.length < 3) {
       newErrors.username = 'Username must be at least 3 characters long';
     }
 
     // Email validation
-    if (!email.trim()) {
+    if (!email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Please enter a valid email address';

@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import './FormikForm.css';
 
 // Validation schema using Yup
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
   username: Yup.string()
     .min(3, 'Username must be at least 3 characters long')
     .max(20, 'Username must be less than 20 characters')
