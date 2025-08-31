@@ -1,12 +1,96 @@
-# React + Vite
+# React Form Handling Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates two different approaches to form handling in React:
 
-Currently, two official plugins are available:
+1. **Controlled Components** - Manual state management using React's `useState` hook
+2. **Formik with Yup** - Form library with built-in state management and validation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+### Controlled Components (`RegistrationForm.jsx`)
+- Manual state management with `useState`
+- Custom validation logic
+- Real-time error clearing
+- Mock API integration
+- Responsive design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Formik Integration (`formikForm.jsx`)
+- Formik library for form state management
+- Yup validation schema
+- Built-in error handling
+- Field-level validation
+- Form submission handling
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── RegistrationForm.jsx      # Controlled components form
+│   ├── RegistrationForm.css      # Styles for controlled form
+│   ├── formikForm.jsx           # Formik-based form
+│   └── FormikForm.css           # Styles for Formik form
+├── App.jsx                      # Main application component
+├── App.css                      # Application styles
+├── main.jsx                     # Application entry point
+└── index.css                    # Global styles
+```
+
+## Technologies Used
+
+- **React 19.1.1** - UI library
+- **Formik 2.4.6** - Form management library
+- **Yup 1.7.0** - Schema validation library
+- **Vite** - Build tool and development server
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open your browser and navigate to `http://localhost:5173`
+
+## Form Validation
+
+### Controlled Components Validation
+- Username: Required, minimum 3 characters
+- Email: Required, valid email format
+- Password: Required, minimum 6 characters
+
+### Formik with Yup Validation
+- Username: Required, 3-20 characters, alphanumeric + underscore only
+- Email: Required, valid email format
+- Password: Required, 6-50 characters, must contain uppercase, lowercase, and number
+- Confirm Password: Must match password
+
+## API Integration
+
+Both forms include mock API integration that simulates user registration with a 90% success rate. The API calls are asynchronous and include proper error handling.
+
+## Styling
+
+The project includes modern, responsive CSS with:
+- Gradient backgrounds
+- Smooth animations and transitions
+- Error state styling
+- Loading states
+- Mobile-responsive design
+
+## Learning Objectives
+
+This project demonstrates:
+- React controlled components
+- Form state management
+- Validation techniques
+- Error handling
+- API integration
+- Modern React patterns
+- Formik library usage
+- Yup validation schemas

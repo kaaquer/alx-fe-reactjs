@@ -2,21 +2,31 @@ import React, { useState } from 'react';
 import './RegistrationForm.css';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+    
+    // Update the appropriate state variable
+    switch (name) {
+      case 'username':
+        setUsername(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+    
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prevErrors => ({
@@ -30,23 +40,23 @@ const RegistrationForm = () => {
     const newErrors = {};
 
     // Username validation
-    if (!formData.username.trim()) {
+    if (!username.trim()) {
       newErrors.username = 'Username is required';
-    } else if (formData.username.length < 3) {
+    } else if (username.length < 3) {
       newErrors.username = 'Username must be at least 3 characters long';
     }
 
     // Email validation
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
     // Password validation
-    if (!formData.password) {
+    if (!password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
+    } else if (password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters long';
     }
 
@@ -66,9 +76,12 @@ const RegistrationForm = () => {
 
     try {
       // Simulate API call
-      const response = await mockUserRegistration(formData);
+      const userData = { username, email, password };
+      const response = await mockUserRegistration(userData);
       setSubmitMessage('Registration successful! Welcome aboard!');
-      setFormData({ username: '', email: '', password: '' });
+      setUsername('');
+      setEmail('');
+      setPassword('');
     } catch (error) {
       setSubmitMessage('Registration failed. Please try again.');
     } finally {
@@ -103,7 +116,7 @@ const RegistrationForm = () => {
             type="text"
             id="username"
             name="username"
-            value={formData.username}
+            value={username}
             onChange={handleChange}
             className={errors.username ? 'error' : ''}
             placeholder="Enter your username"
@@ -117,7 +130,7 @@ const RegistrationForm = () => {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
+            value={email}
             onChange={handleChange}
             className={errors.email ? 'error' : ''}
             placeholder="Enter your email"
@@ -131,7 +144,7 @@ const RegistrationForm = () => {
             type="password"
             id="password"
             name="password"
-            value={formData.password}
+            value={password}
             onChange={handleChange}
             className={errors.password ? 'error' : ''}
             placeholder="Enter your password"
